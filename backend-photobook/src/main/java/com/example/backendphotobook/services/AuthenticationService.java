@@ -28,21 +28,22 @@ public class AuthenticationService {
             Authentication authenticate = this.authenticationManager.authenticate(dataLogin);
             UsuariosEntity usuario = (UsuariosEntity) authenticate.getPrincipal();
             String token = tokenService.generateToken(usuario, "login");
-            response = loginResponse(200, HttpStatus.OK, token, "Login realizado com sucesso.");
+            response = loginResponse(200, HttpStatus.OK, token, "Login realizado com sucesso.", usuario.getId());
 
         } catch (AuthenticationException e) {
-            response = loginResponse(400, HttpStatus.BAD_REQUEST, "", "Erro: " + e.getMessage());
+            response = loginResponse(400, HttpStatus.BAD_REQUEST, "", "Erro: " + e.getMessage(), 0);
         }
         return ResponseEntity.status(response.getHttpStatusCode()).body(response);
     }
 
-    private LoginResponse loginResponse(int code, HttpStatus httpStatus, String token, String mensagem) {
+    private LoginResponse loginResponse(int code, HttpStatus httpStatus, String token, String mensagem, long usuarioId) {
         LoginResponse response = new LoginResponse();
 
         response.setHttpStatusCode(code);
         response.setHttpStatus(httpStatus);
         response.setJwt(token);
         response.setMensagem(mensagem);
+        response.setUsuarioId(usuarioId);
 
         return response;
     }

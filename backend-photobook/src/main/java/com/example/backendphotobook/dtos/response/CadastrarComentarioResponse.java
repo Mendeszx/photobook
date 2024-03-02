@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
-public class CadastroUsuarioResponse {
+public class CadastrarComentarioResponse {
+
     private int httpStatusCode;
     private HttpStatus httpStatus;
     private String mensagem;

@@ -1,6 +1,6 @@
 package com.example.backendphotobook.configurations.securityConfig;
 
-import com.api.hairpass.configurations.securityConfig.filter.TokenFilter;
+import com.example.backendphotobook.configurations.securityConfig.filter.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,18 +27,26 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(HttpMethod.POST,"/api/v1/auth/login")
+                        .requestMatchers(HttpMethod.POST, "/v1/auth/login")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/v1/cadastro/usuario")
+                        .requestMatchers(HttpMethod.POST, "/v1/cadastro/usuario")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/v1/cadastro/servico")
-                        .hasRole("USUARIO_EMPRESA")
-                        .requestMatchers(HttpMethod.POST,"/api/v1/cadastro/funcionario-salao")
-                        .hasRole("USUARIO_EMPRESA")
-                        .requestMatchers(HttpMethod.POST,"/api/v1/cadastro/servico-funcionario")
-                        .hasRole("USUARIO_EMPRESA")
-                        .requestMatchers(HttpMethod.GET,"/api/v1/health/check")
-                        .hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/v1/health/check")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/v1/publicacao/nova-publicacao")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/publicacao/listar-publicacoes")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/publicacao/{publicacaoId}")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/v1/publicacao/deletar-publicacao")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/v1/comentario/novo-comentario")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/comentario/listar-comentarios")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/v1/comentario/deletar-comentario")
+                        .permitAll()
                         .anyRequest()
                         .authenticated()
                 )

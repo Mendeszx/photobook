@@ -19,8 +19,6 @@ public class UsuariosService {
     @Autowired
     UsuariosRepository usuariosRepository;
 
-    private final static String DATE_FORMAT = "dd-MM-yyyy";
-
     public Optional<UsuariosEntity> findByEmail(String email) {
         return usuariosRepository.findByEmail(email);
     }
@@ -52,13 +50,13 @@ public class UsuariosService {
         }
     }
 
-    public UsuariosEntity findUsuariosById(Long usuarioId) {
-        Optional<UsuariosEntity> entity = usuariosRepository.findById(usuarioId);
+    public UsuariosEntity findById(long usuarioId) {
+        Optional<UsuariosEntity> usuariosEntity = usuariosRepository.findById(usuarioId);
 
-        if (entity.isPresent()) {
-            return entity.get();
+        if (usuariosEntity.isPresent()) {
+            return usuariosEntity.get();
         } else {
-            throw new RuntimeException("Usuario não encontrado");
+            throw new RuntimeException("Usuário não encontrado");
         }
     }
 }

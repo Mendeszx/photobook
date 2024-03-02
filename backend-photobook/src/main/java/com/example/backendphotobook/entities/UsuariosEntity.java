@@ -18,6 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 public class UsuariosEntity implements UserDetails, Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
