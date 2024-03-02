@@ -1,7 +1,7 @@
 package com.example.backendphotobook.services;
 
 import com.example.backendphotobook.dtos.request.DeletarPublicacaoRequest;
-import com.example.backendphotobook.dtos.request.PublicacaoRequest;
+import com.example.backendphotobook.dtos.request.CadastrarPublicacaoRequest;
 import com.example.backendphotobook.dtos.response.DeletarPublicacaoResponse;
 import com.example.backendphotobook.dtos.response.ListarPublicacoesResponse;
 import com.example.backendphotobook.dtos.response.PublicacaoResponse;
@@ -30,14 +30,11 @@ public class PublicacaoService {
     @Autowired
     private UsuariosService usuariosService;
 
-    @Autowired
-    private ComentarioService comentarioService;
-
-    public ResponseEntity<PublicacaoResponse> cadastrarNovaPublicacao(PublicacaoRequest publicacaoRequest) {
+    public ResponseEntity<PublicacaoResponse> cadastrarNovaPublicacao(CadastrarPublicacaoRequest cadastrarPublicacaoRequest) {
         PublicacaoResponse publicacaoResponse;
 
         try {
-            salvarPublicacao(publicacaoRequest);
+            salvarPublicacao(cadastrarPublicacaoRequest);
             publicacaoResponse = cadastrarNovaPublicacaoResponse(201, HttpStatus.CREATED, "Publicação enviada com sucesso.");
 
         } catch (Exception e) {
@@ -47,17 +44,17 @@ public class PublicacaoService {
         return ResponseEntity.status(publicacaoResponse.getHttpStatusCode()).body(publicacaoResponse);
     }
 
-    private void salvarPublicacao(PublicacaoRequest publicacaoRequest) throws IOException {
+    private void salvarPublicacao(CadastrarPublicacaoRequest cadastrarPublicacaoRequest) throws IOException {
 
         PublicacoesEntity publicacoesEntity = new PublicacoesEntity();
-        BeanUtils.copyProperties(publicacaoRequest, publicacoesEntity);
+        BeanUtils.copyProperties(cadastrarPublicacaoRequest, publicacoesEntity);
 
-        UsuariosEntity usuariosEntity = usuariosService.findById(publicacaoRequest.getUsuarioId());
+        UsuariosEntity usuariosEntity = usuariosService.findById(Long.parseLong(cadastrarPublicacaoRequest.getUsuarioId()));
 
         LocalDate dataDeCadastro = LocalDate.now();
 
-        if (!publicacaoRequest.getFoto().isEmpty() || publicacaoRequest.getFoto() != null) {
-            publicacoesEntity.setImagem(publicacaoRequest.getFoto().getBytes());
+        if (!cadastrarPublicacaoRequest.getFoto().isEmpty() || cadastrarPublicacaoRequest.getFoto() != null) {
+            publicacoesEntity.setImagem(cadastrarPublicacaoRequest.getFoto().getBytes());
         }
 
         publicacoesEntity.setDataDeCadastro(dataDeCadastro);
@@ -157,7 +154,6 @@ public class PublicacaoService {
         PublicacoesEntity publicacoesEntity = findById(publicacaoId);
 
         if (usuarioId == publicacoesEntity.getUsuarioId().getId()){
-            comentarioService.deletarComentarioDeUmaPublicacao(publicacoesEntity);
             publicacoesRepository.delete(publicacoesEntity);
         } else {
             throw new RuntimeException("Usuário não autorizado a excluir essa publicação");

@@ -2,6 +2,7 @@ package com.example.backendphotobook.services;
 
 import com.example.backendphotobook.dtos.request.CadastrarComentarioRequest;
 import com.example.backendphotobook.dtos.request.DeletarComentarioRequest;
+import com.example.backendphotobook.dtos.request.DeletarPublicacaoRequest;
 import com.example.backendphotobook.dtos.request.ListarComentariosRequest;
 import com.example.backendphotobook.dtos.response.CadastrarComentarioResponse;
 import com.example.backendphotobook.dtos.response.DeletarComentarioResponse;
@@ -127,7 +128,6 @@ public class ComentarioService {
         long usuarioId = Long.parseLong(deletarComentarioRequest.getUsuarioId());
         long comentarioId = Long.parseLong(deletarComentarioRequest.getComentarioId());
 
-        PublicacoesEntity publicacoesEntity = publicacaoService.findById(publicacaoId);
         ComentariosEntity comentariosEntity = findById(comentarioId);
 
         if (usuarioId == comentariosEntity.getUsuarioId().getId()){
@@ -147,17 +147,12 @@ public class ComentarioService {
         }
     }
 
-    public void deletarComentarioDeUmaPublicacao(PublicacoesEntity publicacao) {
-        Optional<List<ComentariosEntity>> comentariosEntityList = comentariosRepository.findByPublicacaoId(publicacao);
+    public void deletarComentariosDeUmaPublicacao(DeletarPublicacaoRequest deletarPublicacaoRequest) {
+        PublicacoesEntity publicacoesEntity = publicacaoService.findById(Long.parseLong(deletarPublicacaoRequest.getPublicacaoId()));
+        Optional<List<ComentariosEntity>> comentariosEntityList = comentariosRepository.findByPublicacaoId(publicacoesEntity);
 
         if (comentariosEntityList.isPresent()) {
-            for (ComentariosEntity comentariosEntity : comentariosEntityList.get()){
-                deletarComentarioJuntoComPublicacao(comentariosEntity);
-            }
+            comentariosRepository.deleteAll(comentariosEntityList.get());
         }
-    }
-
-    private void deletarComentarioJuntoComPublicacao(ComentariosEntity comentariosEntity) {
-        comentariosRepository.delete(comentariosEntity);
     }
 }

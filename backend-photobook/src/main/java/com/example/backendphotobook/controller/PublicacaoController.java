@@ -1,11 +1,11 @@
 package com.example.backendphotobook.controller;
 
 import com.example.backendphotobook.dtos.request.DeletarPublicacaoRequest;
-import com.example.backendphotobook.dtos.request.PublicacaoRequest;
+import com.example.backendphotobook.dtos.request.CadastrarPublicacaoRequest;
 import com.example.backendphotobook.dtos.response.DeletarPublicacaoResponse;
 import com.example.backendphotobook.dtos.response.ListarPublicacoesResponse;
 import com.example.backendphotobook.dtos.response.PublicacaoResponse;
-import com.example.backendphotobook.entities.PublicacoesEntity;
+import com.example.backendphotobook.services.ComentarioService;
 import com.example.backendphotobook.services.PublicacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,10 +20,12 @@ public class PublicacaoController {
 
     @Autowired
     private PublicacaoService publicacaoService;
+    @Autowired
+    private ComentarioService comentarioService;
 
     @PostMapping(path = "/nova-publicacao", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<PublicacaoResponse> cadastrarNovaPublicacao(@ModelAttribute PublicacaoRequest publicacaoRequest) {
-        return publicacaoService.cadastrarNovaPublicacao(publicacaoRequest);
+    public ResponseEntity<PublicacaoResponse> cadastrarNovaPublicacao(@ModelAttribute CadastrarPublicacaoRequest cadastrarPublicacaoRequest) {
+        return publicacaoService.cadastrarNovaPublicacao(cadastrarPublicacaoRequest);
     }
 
     @GetMapping("/listar-publicacoes")
@@ -38,6 +40,7 @@ public class PublicacaoController {
 
     @DeleteMapping("/deletar-publicacao")
     public ResponseEntity<DeletarPublicacaoResponse> deletarPublicacao(@RequestBody DeletarPublicacaoRequest deletarPublicacaoRequest) {
+        comentarioService.deletarComentariosDeUmaPublicacao(deletarPublicacaoRequest);
         return publicacaoService.deletarUmaPublicacao(deletarPublicacaoRequest);
     }
 }
