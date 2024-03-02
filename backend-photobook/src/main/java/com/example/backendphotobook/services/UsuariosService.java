@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -33,7 +33,7 @@ public class UsuariosService {
 
         usuariosEntity.setSenha(new BCryptPasswordEncoder().encode(cadastroUsuarioRequest.getSenha()));
 
-        LocalDate dataDeCadastro = LocalDate.now();
+        Date dataDeCadastro = new Date();
 
         usuariosEntity.setDataDeCadastro(dataDeCadastro);
         usuariosEntity.setRole(RoleEnum.ROLE_USUARIO);

@@ -9,8 +9,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,7 +32,7 @@ public class UsuariosEntity implements UserDetails, Serializable {
     @Column(nullable = false, name = "senha")
     private String senha;
     @Column(nullable = false, name = "data_de_cadastro")
-    private LocalDate dataDeCadastro;
+    private Date dataDeCadastro;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "role")
     private RoleEnum role;

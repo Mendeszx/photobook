@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "publicacoes")
@@ -26,5 +26,5 @@ public class PublicacoesEntity {
     @JoinColumn(nullable = false, name = "usuario_id", referencedColumnName = "id", unique = true)
     private UsuariosEntity usuarioId;
     @Column(nullable = false, name = "data_de_cadastro")
-    private LocalDate dataDeCadastro;
+    private Date dataDeCadastro;
 }

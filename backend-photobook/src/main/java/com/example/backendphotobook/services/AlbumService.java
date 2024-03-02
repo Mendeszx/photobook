@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -60,7 +60,7 @@ public class AlbumService {
 
         UsuariosEntity usuariosEntity = usuariosService.findById(Long.parseLong(cadastrarNovoAlbumRequest.getUsuarioId()));
 
-        LocalDate dataDeCadastro = LocalDate.now();
+        Date dataDeCadastro = new Date();
 
         albunsEntity.setDataDeCadastro(dataDeCadastro);
         albunsEntity.setUsuarioId(usuariosEntity);

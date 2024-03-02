@@ -15,11 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PublicacaoService {
@@ -51,7 +47,7 @@ public class PublicacaoService {
 
         UsuariosEntity usuariosEntity = usuariosService.findById(Long.parseLong(cadastrarPublicacaoRequest.getUsuarioId()));
 
-        LocalDate dataDeCadastro = LocalDate.now();
+        Date dataDeCadastro = new Date();
 
         if (!cadastrarPublicacaoRequest.getFoto().isEmpty() || cadastrarPublicacaoRequest.getFoto() != null) {
             publicacoesEntity.setImagem(cadastrarPublicacaoRequest.getFoto().getBytes());

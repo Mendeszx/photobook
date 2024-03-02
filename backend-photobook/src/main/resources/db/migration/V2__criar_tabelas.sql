@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS usuarios
     foto             BYTEA,
     email            VARCHAR(255) NOT NULL,
     senha            VARCHAR(255) NOT NULL,
-    data_de_cadastro DATE         NOT NULL,
+    data_de_cadastro timestamp    NOT NULL,
     role             VARCHAR(50)  NOT NULL,
     usuario_ativo    BOOLEAN      NOT NULL
 );
@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS publicacoes
     descricao        VARCHAR(1000),
     imagem           BYTEA,
     curtidas         INTEGER,
-    usuario_id       BIGINT NOT NULL,
-    data_de_cadastro DATE   NOT NULL,
+    usuario_id       BIGINT    NOT NULL,
+    data_de_cadastro timestamp NOT NULL,
     FOREIGN KEY (usuario_id) REFERENCES usuarios (id)
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS comentarios
     publicacao_id    BIGINT        NOT NULL,
     usuario_id       BIGINT        NOT NULL,
     comentario       VARCHAR(1000) NOT NULL,
-    data_de_cadastro DATE          NOT NULL,
+    data_de_cadastro timestamp     NOT NULL,
     FOREIGN KEY (publicacao_id) REFERENCES publicacoes (id),
     FOREIGN KEY (usuario_id) REFERENCES usuarios (id)
 );
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS albuns
     descricao        VARCHAR(1000),
     curtidas         INTEGER,
     usuario_id       BIGINT NOT NULL,
-    data_de_cadastro DATE,
+    data_de_cadastro timestamp,
     FOREIGN KEY (usuario_id) REFERENCES usuarios (id)
 );
 

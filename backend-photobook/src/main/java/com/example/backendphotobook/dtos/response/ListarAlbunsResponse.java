@@ -3,7 +3,7 @@ package com.example.backendphotobook.dtos.response;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -15,5 +15,5 @@ public class ListarAlbunsResponse {
     private int curtidas;
     private String nome;
     private String foto;
-    private LocalDate dataDeCadastro;
+    private Date dataDeCadastro;
 }
