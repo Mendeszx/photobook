@@ -30,6 +30,9 @@ public class PublicacaoService {
     @Autowired
     private UsuariosService usuariosService;
 
+    @Autowired
+    private ComentarioService comentarioService;
+
     public ResponseEntity<PublicacaoResponse> cadastrarNovaPublicacao(PublicacaoRequest publicacaoRequest) {
         PublicacaoResponse publicacaoResponse;
 
@@ -154,6 +157,7 @@ public class PublicacaoService {
         PublicacoesEntity publicacoesEntity = findById(publicacaoId);
 
         if (usuarioId == publicacoesEntity.getUsuarioId().getId()){
+            comentarioService.deletarComentarioDeUmaPublicacao(publicacoesEntity);
             publicacoesRepository.delete(publicacoesEntity);
         } else {
             throw new RuntimeException("Usuário não autorizado a excluir essa publicação");

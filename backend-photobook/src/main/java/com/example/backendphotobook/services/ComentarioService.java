@@ -5,7 +5,6 @@ import com.example.backendphotobook.dtos.request.DeletarComentarioRequest;
 import com.example.backendphotobook.dtos.request.ListarComentariosRequest;
 import com.example.backendphotobook.dtos.response.CadastrarComentarioResponse;
 import com.example.backendphotobook.dtos.response.DeletarComentarioResponse;
-import com.example.backendphotobook.dtos.response.DeletarPublicacaoResponse;
 import com.example.backendphotobook.dtos.response.ListarComentariosResponse;
 import com.example.backendphotobook.entities.ComentariosEntity;
 import com.example.backendphotobook.entities.PublicacoesEntity;
@@ -146,5 +145,19 @@ public class ComentarioService {
         } else {
             throw new RuntimeException("Comentario não encontrado");
         }
+    }
+
+    public void deletarComentarioDeUmaPublicacao(PublicacoesEntity publicacao) {
+        Optional<List<ComentariosEntity>> comentariosEntityList = comentariosRepository.findByPublicacaoId(publicacao);
+
+        if (comentariosEntityList.isPresent()) {
+            for (ComentariosEntity comentariosEntity : comentariosEntityList.get()){
+                deletarComentarioJuntoComPublicacao(comentariosEntity);
+            }
+        }
+    }
+
+    private void deletarComentarioJuntoComPublicacao(ComentariosEntity comentariosEntity) {
+        comentariosRepository.delete(comentariosEntity);
     }
 }
