@@ -71,7 +71,7 @@ public class PublicacaoService {
 
     public ResponseEntity<List<ListarPublicacoesResponse>> listarPublicacoes() {
         List<ListarPublicacoesResponse> publicacoesResponseList = new ArrayList<>();
-        List<PublicacoesEntity> publicacoesEntityList = publicacoesRepository.findAll();
+        List<PublicacoesEntity> publicacoesEntityList = publicacoesRepository.findAllByOrderByDataDeCadastroDesc();
 
         for (PublicacoesEntity publicacoesEntity : publicacoesEntityList) {
             ListarPublicacoesResponse listarPublicacoesResponse = new ListarPublicacoesResponse();

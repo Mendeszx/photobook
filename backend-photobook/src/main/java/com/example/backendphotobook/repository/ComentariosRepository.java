@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface ComentariosRepository extends JpaRepository<ComentariosEntity, Long> {
     Optional<List<ComentariosEntity>> findByPublicacaoId(PublicacoesEntity publicacao);
+    Optional<List<ComentariosEntity>> findByPublicacaoIdOrderByDataDeCadastroDesc(PublicacoesEntity publicacoesEntity);
 }

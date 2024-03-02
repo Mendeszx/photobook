@@ -1,7 +1,6 @@
 package com.example.backendphotobook.services;
 
 import com.example.backendphotobook.dtos.request.CadastrarNovoAlbumRequest;
-import com.example.backendphotobook.dtos.request.ListarAlbunsRequest;
 import com.example.backendphotobook.dtos.response.CadastrarNovoAlbumResponse;
 import com.example.backendphotobook.dtos.response.ListarAlbunsResponse;
 import com.example.backendphotobook.entities.AlbunsEntity;
@@ -55,6 +54,11 @@ public class AlbumService {
     }
 
     private void salvarAlbum(CadastrarNovoAlbumRequest cadastrarNovoAlbumRequest) throws IOException {
+
+        if (cadastrarNovoAlbumRequest.getImagens() == null || cadastrarNovoAlbumRequest.getImagens().length == 0) {
+            throw new RuntimeException("O album não pode estar vazio");
+        }
+
         AlbunsEntity albunsEntity = new AlbunsEntity();
         BeanUtils.copyProperties(cadastrarNovoAlbumRequest, albunsEntity);
 
@@ -67,23 +71,21 @@ public class AlbumService {
 
         albunsEntity = albunsRepository.save(albunsEntity);
 
-        if (cadastrarNovoAlbumRequest.getImagens() != null && cadastrarNovoAlbumRequest.getImagens().length > 0) {
-            for (MultipartFile imagem : cadastrarNovoAlbumRequest.getImagens()) {
+        for (MultipartFile imagem : cadastrarNovoAlbumRequest.getImagens()) {
 
-                ImagensAlbunsEntity imagensAlbunsEntity = new ImagensAlbunsEntity();
+            ImagensAlbunsEntity imagensAlbunsEntity = new ImagensAlbunsEntity();
 
-                imagensAlbunsEntity.setAlbumId(albunsEntity);
-                imagensAlbunsEntity.setImagem(imagem.getBytes());
+            imagensAlbunsEntity.setAlbumId(albunsEntity);
+            imagensAlbunsEntity.setImagem(imagem.getBytes());
 
-                imagensAlbunsService.save(imagensAlbunsEntity);
-            }
+            imagensAlbunsService.save(imagensAlbunsEntity);
         }
     }
 
     public ResponseEntity<List<ListarAlbunsResponse>> listarAlbuns(long usuarioId) {
         List<ListarAlbunsResponse> albunsResponseList = new ArrayList<>();
         UsuariosEntity usuariosEntity = usuariosService.findById(usuarioId);
-        List<AlbunsEntity> albunsEntityList = albunsRepository.findByUsuarioId(usuariosEntity);
+        List<AlbunsEntity> albunsEntityList = albunsRepository.findByUsuarioIdOrderByDataDeCadastroDesc(usuariosEntity);
 
         for (AlbunsEntity albunsEntity : albunsEntityList) {
             ListarAlbunsResponse listarAlbunsResponse = new ListarAlbunsResponse();

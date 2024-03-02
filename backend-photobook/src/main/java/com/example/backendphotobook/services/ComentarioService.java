@@ -76,20 +76,23 @@ public class ComentarioService {
     public ResponseEntity<List<ListarComentariosResponse>> listarComentarios(ListarComentariosRequest listarComentariosRequest) {
 
         List<ListarComentariosResponse> comentariosResponseList = new ArrayList<>();
-        List<ComentariosEntity> comentariosEntitiesList = comentariosRepository.findAll();
+        PublicacoesEntity publicacoesEntity = publicacaoService.findById(Long.parseLong(listarComentariosRequest.getPublicacaoId()));
+        Optional<List<ComentariosEntity>> comentariosEntitiesList = comentariosRepository.findByPublicacaoIdOrderByDataDeCadastroDesc(publicacoesEntity);
 
-        for (ComentariosEntity comentariosEntity : comentariosEntitiesList) {
-            ListarComentariosResponse listarComentariosResponse = new ListarComentariosResponse();
+        if (comentariosEntitiesList.isPresent()){
+            for (ComentariosEntity comentariosEntity : comentariosEntitiesList.get()) {
+                ListarComentariosResponse listarComentariosResponse = new ListarComentariosResponse();
 
-            if (comentariosEntity.getUsuarioId().getFoto() != null) {
-                listarComentariosResponse.setFoto(Base64.getEncoder().encodeToString(comentariosEntity.getUsuarioId().getFoto()));
+                if (comentariosEntity.getUsuarioId().getFoto() != null) {
+                    listarComentariosResponse.setFoto(Base64.getEncoder().encodeToString(comentariosEntity.getUsuarioId().getFoto()));
+                }
+
+                listarComentariosResponse.setComentario(comentariosEntity.getComentario());
+                listarComentariosResponse.setNome(comentariosEntity.getUsuarioId().getNome());
+                listarComentariosResponse.setDataDeCadastro(comentariosEntity.getDataDeCadastro());
+
+                comentariosResponseList.add(listarComentariosResponse);
             }
-
-            listarComentariosResponse.setComentario(comentariosEntity.getComentario());
-            listarComentariosResponse.setNome(comentariosEntity.getUsuarioId().getNome());
-            listarComentariosResponse.setDataDeCadastro(comentariosEntity.getDataDeCadastro());
-
-            comentariosResponseList.add(listarComentariosResponse);
         }
 
         return ResponseEntity.ok().body(comentariosResponseList);
