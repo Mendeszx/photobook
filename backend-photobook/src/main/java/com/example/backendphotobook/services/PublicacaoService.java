@@ -1,6 +1,7 @@
 package com.example.backendphotobook.services;
 
 import com.example.backendphotobook.dtos.request.PublicacaoRequest;
+import com.example.backendphotobook.dtos.response.ListarPublicacoesResponse;
 import com.example.backendphotobook.dtos.response.PublicacaoResponse;
 import com.example.backendphotobook.entities.PublicacoesEntity;
 import com.example.backendphotobook.entities.UsuariosEntity;
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 
 @Service
 public class PublicacaoService {
@@ -47,7 +51,7 @@ public class PublicacaoService {
         LocalDate dataDeCadastro = LocalDate.now();
 
         if (!publicacaoRequest.getFoto().isEmpty() || publicacaoRequest.getFoto() != null){
-            publicacoesEntity.setFoto(publicacaoRequest.getFoto().getBytes());
+            publicacoesEntity.setImagem(publicacaoRequest.getFoto().getBytes());
         }
 
         publicacoesEntity.setDataDeCadastro(dataDeCadastro);
@@ -64,5 +68,30 @@ public class PublicacaoService {
         publicacaoResponse.setMensagem(mensagem);
 
         return publicacaoResponse;
+    }
+
+    public ResponseEntity<List<ListarPublicacoesResponse>> listarPublicacoes() {
+        List<ListarPublicacoesResponse> publicacoesResponseList = new ArrayList<>();
+        List<PublicacoesEntity> publicacoesEntityList = publicacoesRepository.findAll();
+
+        for (PublicacoesEntity publicacoesEntity : publicacoesEntityList){
+            ListarPublicacoesResponse listarPublicacoesResponse = new ListarPublicacoesResponse();
+
+            if (publicacoesEntity.getImagem() != null) {
+                listarPublicacoesResponse.setImagem(Base64.getEncoder().encodeToString(publicacoesEntity.getImagem()));
+            }
+            if (publicacoesEntity.getUsuarioId().getFoto() != null){
+                listarPublicacoesResponse.setFoto(Base64.getEncoder().encodeToString(publicacoesEntity.getUsuarioId().getFoto()));
+            }
+
+            listarPublicacoesResponse.setDescricao(publicacoesEntity.getDescricao());
+            listarPublicacoesResponse.setCurtidas(publicacoesEntity.getCurtidas());
+            listarPublicacoesResponse.setNome(publicacoesEntity.getUsuarioId().getNome());
+            listarPublicacoesResponse.setDataDeCadastro(publicacoesEntity.getDataDeCadastro());
+
+            publicacoesResponseList.add(listarPublicacoesResponse);
+        }
+
+        return ResponseEntity.ok().body(publicacoesResponseList);
     }
 }

@@ -18,8 +18,8 @@ public class PublicacoesEntity {
     private Long id;
     @Column(name = "descricao")
     private String descricao;
-    @Column(name = "foto")
-    private byte[] foto;
+    @Column(name = "imagem")
+    private byte[] imagem;
     @Column(name = "curtidas")
     private int curtidas;
     @ManyToOne
