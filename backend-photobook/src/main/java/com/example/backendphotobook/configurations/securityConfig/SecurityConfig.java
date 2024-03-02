@@ -33,6 +33,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/v1/health/check")
                         .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/v1/publicacao/nova-publicacao")
+                        .permitAll()
                         .anyRequest()
                         .authenticated()
                 )

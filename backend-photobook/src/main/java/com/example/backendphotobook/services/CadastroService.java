@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class CadastroService {
 
     @Autowired
-    UsuariosService usuariosService;
+    private UsuariosService usuariosService;
 
     public ResponseEntity<CadastroUsuarioResponse> cadastrarNovoUsuario(CadastroUsuarioRequest cadastroUsuarioRequest) {
         CadastroUsuarioResponse cadastroUsuarioResponse;

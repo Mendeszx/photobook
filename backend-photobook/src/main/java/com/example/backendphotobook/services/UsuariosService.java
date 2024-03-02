@@ -49,4 +49,14 @@ public class UsuariosService {
             throw new RuntimeException("Email ja cadastrado");
         }
     }
+
+    public UsuariosEntity findById(long usuarioId) {
+        Optional<UsuariosEntity> usuariosEntity = usuariosRepository.findById(usuarioId);
+
+        if (usuariosEntity.isPresent()) {
+            return usuariosEntity.get();
+        } else {
+            throw new RuntimeException("Usuário não encontrado");
+        }
+    }
 }
