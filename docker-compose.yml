@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  #  frontend:
+  #    build:
+  #      context: ./frontend-photobook
+  #      dockerfile: Dockerfile
+  #    container_name: frontend-photobook
+  #    ports:
+  #      - "8080:80"
+  #    depends_on:
+  #      - db
+  #    networks:
+  #      - photobook-network
+
+  backend:
+    build:
+      context: ./backend-photobook
+      dockerfile: Dockerfile
+    container_name: backend-photobook
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/photobook_db
+      - SPRING_DATASOURCE_USERNAME=photobook
+      - SPRING_DATASOURCE_PASSWORD=photobook
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+    networks:
+      - photobook-network
+
+  db:
+    image: postgres:latest
+    container_name: db
+    environment:
+      - POSTGRES_DB=photobook_db
+      - POSTGRES_USER=photobook
+      - POSTGRES_PASSWORD=photobook
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - "54320:5432"
+    networks:
+      - photobook-network
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  photobook-network:
