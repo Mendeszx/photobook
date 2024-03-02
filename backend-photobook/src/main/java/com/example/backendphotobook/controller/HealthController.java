@@ -1,11 +1,10 @@
 package com.example.backendphotobook.controller;
 
-import com.example.backendphotobook.dtos.request.CadastroUsuarioRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/health")
-public class HealthCheck {
+public class HealthController {
 
     @GetMapping("/check")
     public String healthCheck() {

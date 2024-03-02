@@ -161,7 +161,7 @@ public class PublicacaoService {
 
     }
 
-    private PublicacoesEntity findById(long publicacaoId) {
+    public PublicacoesEntity findById(long publicacaoId) {
         Optional<PublicacoesEntity> publicacoesEntity = publicacoesRepository.findById(publicacaoId);
 
         if (publicacoesEntity.isPresent()) {
