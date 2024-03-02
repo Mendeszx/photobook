@@ -1,6 +1,8 @@
 package com.example.backendphotobook.services;
 
+import com.example.backendphotobook.dtos.request.DeletarPublicacaoRequest;
 import com.example.backendphotobook.dtos.request.PublicacaoRequest;
+import com.example.backendphotobook.dtos.response.DeletarPublicacaoResponse;
 import com.example.backendphotobook.dtos.response.ListarPublicacoesResponse;
 import com.example.backendphotobook.dtos.response.PublicacaoResponse;
 import com.example.backendphotobook.entities.PublicacoesEntity;
@@ -97,27 +99,75 @@ public class PublicacaoService {
     }
 
     public ResponseEntity<ListarPublicacoesResponse> procurarUmaPublicacao(long publicacaoId) {
+        PublicacoesEntity publicacoesEntity;
+        try {
+            publicacoesEntity = findById(publicacaoId);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ListarPublicacoesResponse listarPublicacoesResponse = new ListarPublicacoesResponse();
+
+        if (publicacoesEntity.getImagem() != null) {
+            listarPublicacoesResponse.setImagem(Base64.getEncoder().encodeToString(publicacoesEntity.getImagem()));
+        }
+        if (publicacoesEntity.getUsuarioId().getFoto() != null) {
+            listarPublicacoesResponse.setFoto(Base64.getEncoder().encodeToString(publicacoesEntity.getUsuarioId().getFoto()));
+        }
+
+        listarPublicacoesResponse.setDescricao(publicacoesEntity.getDescricao());
+        listarPublicacoesResponse.setCurtidas(publicacoesEntity.getCurtidas());
+        listarPublicacoesResponse.setNome(publicacoesEntity.getUsuarioId().getNome());
+        listarPublicacoesResponse.setDataDeCadastro(publicacoesEntity.getDataDeCadastro());
+
+        return ResponseEntity.ok().body(listarPublicacoesResponse);
+    }
+
+    public ResponseEntity<DeletarPublicacaoResponse> deletarUmaPublicacao(DeletarPublicacaoRequest deletarPublicacaoRequest) {
+        DeletarPublicacaoResponse deletarPublicacaoResponse;
+
+        try {
+            deletarPublicacao(deletarPublicacaoRequest);
+            deletarPublicacaoResponse = deletarUmaPublicacaoResponse(200, HttpStatus.OK, "Publicação apagada com sucesso.");
+
+        } catch (Exception e) {
+            deletarPublicacaoResponse = deletarUmaPublicacaoResponse(400, HttpStatus.BAD_REQUEST, "Erro: " + e.getMessage());
+        }
+
+        return ResponseEntity.status(deletarPublicacaoResponse.getHttpStatusCode()).body(deletarPublicacaoResponse);
+    }
+
+    private DeletarPublicacaoResponse deletarUmaPublicacaoResponse(int httpStatusCode, HttpStatus httpStatus, String mensagem) {
+        DeletarPublicacaoResponse deletarPublicacaoResponse = new DeletarPublicacaoResponse();
+
+        deletarPublicacaoResponse.setHttpStatusCode(httpStatusCode);
+        deletarPublicacaoResponse.setHttpStatus(httpStatus);
+        deletarPublicacaoResponse.setMensagem(mensagem);
+
+        return deletarPublicacaoResponse;
+    }
+
+    private void deletarPublicacao(DeletarPublicacaoRequest deletarPublicacaoRequest) {
+        long publicacaoId = Long.parseLong(deletarPublicacaoRequest.getPublicacaoId());
+        long usuarioId = Long.parseLong(deletarPublicacaoRequest.getUsuarioId());
+
+        PublicacoesEntity publicacoesEntity = findById(publicacaoId);
+
+        if (usuarioId == publicacoesEntity.getUsuarioId().getId()){
+            publicacoesRepository.delete(publicacoesEntity);
+        } else {
+            throw new RuntimeException("Usuário não autorizado a excluir essa publicação");
+        }
+
+    }
+
+    private PublicacoesEntity findById(long publicacaoId) {
         Optional<PublicacoesEntity> publicacoesEntity = publicacoesRepository.findById(publicacaoId);
 
         if (publicacoesEntity.isPresent()) {
-
-            ListarPublicacoesResponse listarPublicacoesResponse = new ListarPublicacoesResponse();
-
-            if (publicacoesEntity.get().getImagem() != null) {
-                listarPublicacoesResponse.setImagem(Base64.getEncoder().encodeToString(publicacoesEntity.get().getImagem()));
-            }
-            if (publicacoesEntity.get().getUsuarioId().getFoto() != null) {
-                listarPublicacoesResponse.setFoto(Base64.getEncoder().encodeToString(publicacoesEntity.get().getUsuarioId().getFoto()));
-            }
-
-            listarPublicacoesResponse.setDescricao(publicacoesEntity.get().getDescricao());
-            listarPublicacoesResponse.setCurtidas(publicacoesEntity.get().getCurtidas());
-            listarPublicacoesResponse.setNome(publicacoesEntity.get().getUsuarioId().getNome());
-            listarPublicacoesResponse.setDataDeCadastro(publicacoesEntity.get().getDataDeCadastro());
-
-            return ResponseEntity.ok().body(listarPublicacoesResponse);
+            return publicacoesEntity.get();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new RuntimeException("Publicação não encontrada");
         }
     }
 }

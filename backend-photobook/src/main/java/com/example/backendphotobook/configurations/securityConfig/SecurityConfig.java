@@ -39,6 +39,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/v1/publicacao/{publicacaoId}")
                         .permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/v1/publicacao/deletar-publicacao")
+                        .permitAll()
                         .anyRequest()
                         .authenticated()
                 )

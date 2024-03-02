@@ -1,6 +1,8 @@
 package com.example.backendphotobook.controller;
 
+import com.example.backendphotobook.dtos.request.DeletarPublicacaoRequest;
 import com.example.backendphotobook.dtos.request.PublicacaoRequest;
+import com.example.backendphotobook.dtos.response.DeletarPublicacaoResponse;
 import com.example.backendphotobook.dtos.response.ListarPublicacoesResponse;
 import com.example.backendphotobook.dtos.response.PublicacaoResponse;
 import com.example.backendphotobook.entities.PublicacoesEntity;
@@ -32,5 +34,10 @@ public class PublicacaoController {
     @GetMapping("/{publicacaoId}")
     public ResponseEntity<ListarPublicacoesResponse> procurarUmaPublicacao(@PathVariable long publicacaoId) {
         return publicacaoService.procurarUmaPublicacao(publicacaoId);
+    }
+
+    @DeleteMapping("/deletar-publicacao")
+    public ResponseEntity<DeletarPublicacaoResponse> deletarPublicacao(@RequestBody DeletarPublicacaoRequest deletarPublicacaoRequest) {
+        return publicacaoService.deletarUmaPublicacao(deletarPublicacaoRequest);
     }
 }
