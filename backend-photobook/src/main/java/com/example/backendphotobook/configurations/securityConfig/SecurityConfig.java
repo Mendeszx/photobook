@@ -37,6 +37,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/v1/publicacao/listar-publicacoes")
                         .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/publicacao/{publicacaoId}")
+                        .permitAll()
                         .anyRequest()
                         .authenticated()
                 )

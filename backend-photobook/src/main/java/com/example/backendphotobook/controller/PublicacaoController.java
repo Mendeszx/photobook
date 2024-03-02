@@ -28,4 +28,9 @@ public class PublicacaoController {
     public ResponseEntity<List<ListarPublicacoesResponse>> listarPublicacoes() {
         return publicacaoService.listarPublicacoes();
     }
+
+    @GetMapping("/{publicacaoId}")
+    public ResponseEntity<ListarPublicacoesResponse> procurarUmaPublicacao(@PathVariable long publicacaoId) {
+        return publicacaoService.procurarUmaPublicacao(publicacaoId);
+    }
 }
