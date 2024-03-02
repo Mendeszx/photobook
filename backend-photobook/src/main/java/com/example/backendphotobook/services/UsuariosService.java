@@ -19,8 +19,6 @@ public class UsuariosService {
     @Autowired
     UsuariosRepository usuariosRepository;
 
-    private final static String DATE_FORMAT = "dd-MM-yyyy";
-
     public Optional<UsuariosEntity> findByEmail(String email) {
         return usuariosRepository.findByEmail(email);
     }
@@ -49,16 +47,6 @@ public class UsuariosService {
 
         if (usuariosEntity.isPresent()) {
             throw new RuntimeException("Email ja cadastrado");
-        }
-    }
-
-    public UsuariosEntity findUsuariosById(Long usuarioId) {
-        Optional<UsuariosEntity> entity = usuariosRepository.findById(usuarioId);
-
-        if (entity.isPresent()) {
-            return entity.get();
-        } else {
-            throw new RuntimeException("Usuario não encontrado");
         }
     }
 }
