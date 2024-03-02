@@ -6,9 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
-public class PublicacaoRequest {
+public class CadastrarPublicacaoRequest {
 
     private String descricao;
     private MultipartFile foto;
-    private long usuarioId;
+    private String usuarioId;
 }

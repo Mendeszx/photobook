@@ -4,13 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
-public class ListarPublicacoesResponse {
+public class ListarAlbunsResponse {
 
     private String descricao;
-    private String imagem;
+    private List<String> imagens;
     private int curtidas;
     private String nome;
     private String foto;

@@ -1,7 +1,7 @@
 package com.example.backendphotobook.services;
 
 import com.example.backendphotobook.dtos.request.DeletarPublicacaoRequest;
-import com.example.backendphotobook.dtos.request.PublicacaoRequest;
+import com.example.backendphotobook.dtos.request.CadastrarPublicacaoRequest;
 import com.example.backendphotobook.dtos.response.DeletarPublicacaoResponse;
 import com.example.backendphotobook.dtos.response.ListarPublicacoesResponse;
 import com.example.backendphotobook.dtos.response.PublicacaoResponse;
@@ -15,11 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PublicacaoService {
@@ -30,11 +26,11 @@ public class PublicacaoService {
     @Autowired
     private UsuariosService usuariosService;
 
-    public ResponseEntity<PublicacaoResponse> cadastrarNovaPublicacao(PublicacaoRequest publicacaoRequest) {
+    public ResponseEntity<PublicacaoResponse> cadastrarNovaPublicacao(CadastrarPublicacaoRequest cadastrarPublicacaoRequest) {
         PublicacaoResponse publicacaoResponse;
 
         try {
-            salvarPublicacao(publicacaoRequest);
+            salvarPublicacao(cadastrarPublicacaoRequest);
             publicacaoResponse = cadastrarNovaPublicacaoResponse(201, HttpStatus.CREATED, "Publicação enviada com sucesso.");
 
         } catch (Exception e) {
@@ -44,17 +40,17 @@ public class PublicacaoService {
         return ResponseEntity.status(publicacaoResponse.getHttpStatusCode()).body(publicacaoResponse);
     }
 
-    private void salvarPublicacao(PublicacaoRequest publicacaoRequest) throws IOException {
+    private void salvarPublicacao(CadastrarPublicacaoRequest cadastrarPublicacaoRequest) throws IOException {
 
         PublicacoesEntity publicacoesEntity = new PublicacoesEntity();
-        BeanUtils.copyProperties(publicacaoRequest, publicacoesEntity);
+        BeanUtils.copyProperties(cadastrarPublicacaoRequest, publicacoesEntity);
 
-        UsuariosEntity usuariosEntity = usuariosService.findById(publicacaoRequest.getUsuarioId());
+        UsuariosEntity usuariosEntity = usuariosService.findById(Long.parseLong(cadastrarPublicacaoRequest.getUsuarioId()));
 
-        LocalDate dataDeCadastro = LocalDate.now();
+        Date dataDeCadastro = new Date();
 
-        if (!publicacaoRequest.getFoto().isEmpty() || publicacaoRequest.getFoto() != null) {
-            publicacoesEntity.setImagem(publicacaoRequest.getFoto().getBytes());
+        if (!cadastrarPublicacaoRequest.getFoto().isEmpty() || cadastrarPublicacaoRequest.getFoto() != null) {
+            publicacoesEntity.setImagem(cadastrarPublicacaoRequest.getFoto().getBytes());
         }
 
         publicacoesEntity.setDataDeCadastro(dataDeCadastro);
@@ -75,7 +71,7 @@ public class PublicacaoService {
 
     public ResponseEntity<List<ListarPublicacoesResponse>> listarPublicacoes() {
         List<ListarPublicacoesResponse> publicacoesResponseList = new ArrayList<>();
-        List<PublicacoesEntity> publicacoesEntityList = publicacoesRepository.findAll();
+        List<PublicacoesEntity> publicacoesEntityList = publicacoesRepository.findAllByOrderByDataDeCadastroDesc();
 
         for (PublicacoesEntity publicacoesEntity : publicacoesEntityList) {
             ListarPublicacoesResponse listarPublicacoesResponse = new ListarPublicacoesResponse();

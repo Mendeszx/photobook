@@ -7,10 +7,10 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "publicacoes")
+@Table(name = "albuns")
 @Getter
 @Setter
-public class PublicacoesEntity {
+public class AlbunsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +18,6 @@ public class PublicacoesEntity {
     private Long id;
     @Column(name = "descricao")
     private String descricao;
-    @Column(name = "imagem")
-    private byte[] imagem;
     @Column(name = "curtidas")
     private int curtidas;
     @ManyToOne

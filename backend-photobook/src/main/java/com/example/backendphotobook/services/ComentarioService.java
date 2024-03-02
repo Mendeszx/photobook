@@ -2,10 +2,10 @@ package com.example.backendphotobook.services;
 
 import com.example.backendphotobook.dtos.request.CadastrarComentarioRequest;
 import com.example.backendphotobook.dtos.request.DeletarComentarioRequest;
+import com.example.backendphotobook.dtos.request.DeletarPublicacaoRequest;
 import com.example.backendphotobook.dtos.request.ListarComentariosRequest;
 import com.example.backendphotobook.dtos.response.CadastrarComentarioResponse;
 import com.example.backendphotobook.dtos.response.DeletarComentarioResponse;
-import com.example.backendphotobook.dtos.response.DeletarPublicacaoResponse;
 import com.example.backendphotobook.dtos.response.ListarComentariosResponse;
 import com.example.backendphotobook.entities.ComentariosEntity;
 import com.example.backendphotobook.entities.PublicacoesEntity;
@@ -17,11 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ComentarioService {
@@ -58,7 +54,7 @@ public class ComentarioService {
 
         PublicacoesEntity publicacoesEntity = publicacaoService.findById(Long.parseLong(cadastrarComentarioRequest.getPublicacaoId()));
 
-        LocalDate dataDeCadastro = LocalDate.now();
+        Date dataDeCadastro = new Date();
 
         comentariosEntity.setDataDeCadastro(dataDeCadastro);
         comentariosEntity.setUsuarioId(usuariosEntity);
@@ -80,20 +76,23 @@ public class ComentarioService {
     public ResponseEntity<List<ListarComentariosResponse>> listarComentarios(ListarComentariosRequest listarComentariosRequest) {
 
         List<ListarComentariosResponse> comentariosResponseList = new ArrayList<>();
-        List<ComentariosEntity> comentariosEntitiesList = comentariosRepository.findAll();
+        PublicacoesEntity publicacoesEntity = publicacaoService.findById(Long.parseLong(listarComentariosRequest.getPublicacaoId()));
+        Optional<List<ComentariosEntity>> comentariosEntitiesList = comentariosRepository.findByPublicacaoIdOrderByDataDeCadastroDesc(publicacoesEntity);
 
-        for (ComentariosEntity comentariosEntity : comentariosEntitiesList) {
-            ListarComentariosResponse listarComentariosResponse = new ListarComentariosResponse();
+        if (comentariosEntitiesList.isPresent()){
+            for (ComentariosEntity comentariosEntity : comentariosEntitiesList.get()) {
+                ListarComentariosResponse listarComentariosResponse = new ListarComentariosResponse();
 
-            if (comentariosEntity.getUsuarioId().getFoto() != null) {
-                listarComentariosResponse.setFoto(Base64.getEncoder().encodeToString(comentariosEntity.getUsuarioId().getFoto()));
+                if (comentariosEntity.getUsuarioId().getFoto() != null) {
+                    listarComentariosResponse.setFoto(Base64.getEncoder().encodeToString(comentariosEntity.getUsuarioId().getFoto()));
+                }
+
+                listarComentariosResponse.setComentario(comentariosEntity.getComentario());
+                listarComentariosResponse.setNome(comentariosEntity.getUsuarioId().getNome());
+                listarComentariosResponse.setDataDeCadastro(comentariosEntity.getDataDeCadastro());
+
+                comentariosResponseList.add(listarComentariosResponse);
             }
-
-            listarComentariosResponse.setComentario(comentariosEntity.getComentario());
-            listarComentariosResponse.setNome(comentariosEntity.getUsuarioId().getNome());
-            listarComentariosResponse.setDataDeCadastro(comentariosEntity.getDataDeCadastro());
-
-            comentariosResponseList.add(listarComentariosResponse);
         }
 
         return ResponseEntity.ok().body(comentariosResponseList);
@@ -128,7 +127,6 @@ public class ComentarioService {
         long usuarioId = Long.parseLong(deletarComentarioRequest.getUsuarioId());
         long comentarioId = Long.parseLong(deletarComentarioRequest.getComentarioId());
 
-        PublicacoesEntity publicacoesEntity = publicacaoService.findById(publicacaoId);
         ComentariosEntity comentariosEntity = findById(comentarioId);
 
         if (usuarioId == comentariosEntity.getUsuarioId().getId()){
@@ -145,6 +143,15 @@ public class ComentarioService {
             return comentariosEntity.get();
         } else {
             throw new RuntimeException("Comentario não encontrado");
+        }
+    }
+
+    public void deletarComentariosDeUmaPublicacao(DeletarPublicacaoRequest deletarPublicacaoRequest) {
+        PublicacoesEntity publicacoesEntity = publicacaoService.findById(Long.parseLong(deletarPublicacaoRequest.getPublicacaoId()));
+        Optional<List<ComentariosEntity>> comentariosEntityList = comentariosRepository.findByPublicacaoId(publicacoesEntity);
+
+        if (comentariosEntityList.isPresent()) {
+            comentariosRepository.deleteAll(comentariosEntityList.get());
         }
     }
 }

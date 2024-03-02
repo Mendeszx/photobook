@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "comentarios")
@@ -25,5 +25,5 @@ public class ComentariosEntity {
     @Column(nullable = false, name = "comentario")
     private String comentario;
     @Column(nullable = false, name = "data_de_cadastro")
-    private LocalDate dataDeCadastro;
+    private Date dataDeCadastro;
 }

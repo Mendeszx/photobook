@@ -3,11 +3,9 @@ package com.example.backendphotobook.controller;
 import com.example.backendphotobook.dtos.request.CadastrarComentarioRequest;
 import com.example.backendphotobook.dtos.request.DeletarComentarioRequest;
 import com.example.backendphotobook.dtos.request.ListarComentariosRequest;
-import com.example.backendphotobook.dtos.request.PublicacaoRequest;
 import com.example.backendphotobook.dtos.response.*;
 import com.example.backendphotobook.services.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
