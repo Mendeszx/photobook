@@ -2,14 +2,10 @@ FROM node:latest as build
 
 WORKDIR /frontend
 
-COPY .. .
+COPY . .
 
 RUN npm install
 
-RUN npm run build --prod
+RUN npm install -g @angular/cli
 
-FROM nginx:latest
-
-COPY --from=build /frontend/dist/frontend-photobook /usr/share/nginx/html
-
-EXPOSE 80
+CMD ["ng", "serve", "--host", "0.0.0.0"]
