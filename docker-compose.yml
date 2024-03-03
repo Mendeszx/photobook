@@ -1,17 +1,17 @@
 version: '3.8'
 
 services:
-  #  frontend:
-  #    build:
-  #      context: ./frontend-photobook
-  #      dockerfile: Dockerfile
-  #    container_name: frontend-photobook
-  #    ports:
-  #      - "8080:80"
-  #    depends_on:
-  #      - db
-  #    networks:
-  #      - photobook-network
+  frontend:
+    build:
+      context: ./photobook-frontend
+      dockerfile: Dockerfile
+    container_name: frontend-photobook
+    ports:
+      - "4200:4200"
+    depends_on:
+      - db
+    networks:
+      - photobook-network
 
   backend:
     build:
