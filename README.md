@@ -10,8 +10,13 @@ O projeto Photobook é uma aplicação web desenvolvida para demonstrar um siste
 
 - Java 17
 - Spring Boot
+- Flyway
+- JWT
+- Spring Security
+- Spring Cache
 - Maven
 - Angular
+- Docker
 
 ## Funcionalidades Principais
 
@@ -21,6 +26,10 @@ O projeto Photobook é uma aplicação web desenvolvida para demonstrar um siste
 - Armazenamento de publicações e álbuns de fotos
 - Comentários em publicações e álbuns de fotos
 - Visualização de um feed de notícias
+
+- ## Banco de Dados
+
+O banco de dados utilizado neste projeto é o PostgreSQL. Ele é configurado para ser executado automaticamente usando o Docker Compose e é inicializado com um volume para armazenar os dados. Isso garante que os dados persistam entre as execuções do contêiner. As tabelas são automaticamentes criadas pelo Flyway
 
 ## Pré-requisitos
 
@@ -49,8 +58,8 @@ cd photobook
 docker-compose up
 ```
 
-Isso iniciará o backend (Spring Boot) em [http://localhost:8080](http://localhost:8080)
-E o frontend (Angular) em [http://localhost:4200](http://localhost:4200)
+- Backend (Spring Boot) em [http://localhost:8080](http://localhost:8080)
+- Frontend (Angular) em [http://localhost:4200](http://localhost:4200) (Em Desenvolvimento)
 
 ## Estrutura do Projeto
 
