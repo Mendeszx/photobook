@@ -1,0 +1,1646 @@
+{
+	"info": {
+		"_postman_id": "5243502b-6cdb-4fa8-9113-464fef7a1833",
+		"name": "photobook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15754602"
+	},
+	"item": [
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"guilherme@email.com\",\n    \"senha\": \"guilherme\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"guilherme@email.com\",\n  \"senha\": \"1234\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/cadastro/cadastro-usuario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"cadastro",
+										"cadastro-usuario"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 200,\n    \"httpStatus\": \"OK\",\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYXJsb3NvbGl2ZWlyYUBlbWFpbC5jb20iLCJpc3MiOiJoYWlyLXBhc3MiLCJpZCI6MSwiZXhwIjoxNjk1MzU3OTczLCJpYXQiOjE2OTUzNTQzNzN9.ttsftWq1jrRZaNjSC0il2BhXcQkZToVjDLIfopcHBog\",\n    \"mensagem\": \"Login realizado com sucesso.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/collections` endpoints let you manage your [collections](https://learning.postman.com/docs/sending-requests/intro-to-collections/)."
+		},
+		{
+			"name": "publicacoes",
+			"item": [
+				{
+					"name": "Cadastro nova publicacao",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "foto",
+									"type": "file",
+									"src": "/C:/Users/GuiZz/Pictures/Hana.JPG"
+								},
+								{
+									"key": "descricao",
+									"value": "Gatinha do meu namorado!",
+									"type": "text"
+								},
+								{
+									"key": "usuarioId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/publicacao/nova-publicacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"publicacao",
+								"nova-publicacao"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "foto",
+											"type": "file",
+											"src": "/C:/Users/GuiZz/Pictures/Screenshots/Captura de tela 2024-01-31 214504.png"
+										},
+										{
+											"key": "descricao",
+											"value": "\"teste\"",
+											"type": "text"
+										},
+										{
+											"key": "usuarioId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/publicacao/nova-publicacao",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"publicacao",
+										"nova-publicacao"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 02:07:52 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 201,\n    \"httpStatus\": \"CREATED\",\n    \"mensagem\": \"Publicação enviada com sucesso.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "listar publicacoes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/publicacao/listar-publicacoes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"publicacao",
+								"listar-publicacoes"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/v1/publicacao/listar-publicacoes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"publicacao",
+										"listar-publicacoes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 02:50:24 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"descricao\": \"\\\"primeira postagem\\\"\",\n        \"imagem\": \"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\",\n        \"curtidas\": 0,\n        \"nome\": \"Guilherme Mendes\",\n        \"foto\": null,\n        \"dataDeCadastro\": \"2024-03-01\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "buscar uma publicacao",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/publicacao/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"publicacao",
+								"3"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/v1/publicacao/listar-publicacoes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"publicacao",
+										"listar-publicacoes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 02:50:24 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"descricao\": \"\\\"primeira postagem\\\"\",\n        \"imagem\": \"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\",\n        \"curtidas\": 0,\n        \"nome\": \"Guilherme Mendes\",\n        \"foto\": null,\n        \"dataDeCadastro\": \"2024-03-01\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "deletar publicacao",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"publicacaoId\": \"2\",\r\n    \"usuarioId\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/publicacao/deletar-publicacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"publicacao",
+								"deletar-publicacao"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicacaoId\": \"2\",\r\n    \"usuarioId\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/publicacao/deletar-publicacao",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"publicacao",
+										"deletar-publicacao"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 03:37:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 200,\n    \"httpStatus\": \"OK\",\n    \"mensagem\": \"Publicação apagada com sucesso.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "comentarios",
+			"item": [
+				{
+					"name": "Cadastro comentario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentario\": \"Saudades!\",\r\n    \"publicacaoId\": \"1\",\r\n    \"usuarioId\": \"2\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/comentario/novo-comentario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"comentario",
+								"novo-comentario"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comentario\": \"Que linda!\",\r\n    \"publicacaoId\": \"3\",\r\n    \"usuarioId\": \"2\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/comentario/novo-comentario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"comentario",
+										"novo-comentario"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 04:24:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 201,\n    \"httpStatus\": \"CREATED\",\n    \"mensagem\": \"Comentario enviado com sucesso.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "listar comentarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"publicacaoId\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/comentario/listar-comentarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"comentario",
+								"listar-comentarios"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicacaoId\":\"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/comentario/listar-comentarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"comentario",
+										"listar-comentarios"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 04:43:00 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"comentario\": \"Que linda!\",\n        \"nome\": \"Milena Galende\",\n        \"foto\": null,\n        \"dataDeCadastro\": \"2024-03-02\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "deletar comentario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentarioId\": \"3\",\r\n    \"publicacaoId\": \"1\",\r\n    \"usuarioId\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/comentario/deletar-comentario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"comentario",
+								"deletar-comentario"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comentarioId\": \"3\",\r\n    \"publicacaoId\": \"1\",\r\n    \"usuarioId\": \"2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/comentario/deletar-comentario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"comentario",
+										"deletar-comentario"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 04:56:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 200,\n    \"httpStatus\": \"OK\",\n    \"mensagem\": \"Comentario apagado com sucesso.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "albuns",
+			"item": [
+				{
+					"name": "Cadastro albuns",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "descricao",
+									"value": "Album da Hana aaaaaaaaaaaaaa",
+									"type": "text"
+								},
+								{
+									"key": "usuarioId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "imagens",
+									"type": "file",
+									"src": [
+										"/C:/Users/GuiZz/Pictures/Hana.JPG",
+										"/C:/Users/GuiZz/Downloads/iCloud Photos (1)/iCloud Photos/IMG_0355.JPEG",
+										"/C:/Users/GuiZz/Downloads/iCloud Photos/iCloud Photos/IMG_1751.JPEG"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/album/novo-album",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"album",
+								"novo-album"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comentario\": \"Que linda!\",\r\n    \"publicacaoId\": \"3\",\r\n    \"usuarioId\": \"2\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/comentario/novo-comentario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"comentario",
+										"novo-comentario"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 04:24:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 201,\n    \"httpStatus\": \"CREATED\",\n    \"mensagem\": \"Comentario enviado com sucesso.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "listar albuns",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/album/listar-albuns/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"album",
+								"listar-albuns",
+								"1"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicacaoId\":\"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/comentario/listar-comentarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"comentario",
+										"listar-comentarios"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 04:43:00 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"comentario\": \"Que linda!\",\n        \"nome\": \"Milena Galende\",\n        \"foto\": null,\n        \"dataDeCadastro\": \"2024-03-02\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "deletar comentario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentarioId\": \"3\",\r\n    \"publicacaoId\": \"1\",\r\n    \"usuarioId\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/comentario/deletar-comentario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"comentario",
+								"deletar-comentario"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Succesful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comentarioId\": \"3\",\r\n    \"publicacaoId\": \"1\",\r\n    \"usuarioId\": \"2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/comentario/deletar-comentario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"comentario",
+										"deletar-comentario"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Mar 2024 04:56:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 200,\n    \"httpStatus\": \"OK\",\n    \"mensagem\": \"Comentario apagado com sucesso.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "cadastro",
+			"item": [
+				{
+					"name": "Cadastro usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Milena Galende\",\n  \"email\": \"milena@email.com\",\n  \"senha\": \"milena\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/cadastro/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cadastro",
+								"usuario"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"Guilherme Mendes\",\n  \"cpf\": \"SEU CPF\",\n  \"numeroCelular\": \"11940690606\",\n  \"dataDeNascimento\": \"16/11/2000\",\n  \"sexo\": \"MASCULINO\",\n  \"endereco\": \"Rua Portugal\",\n  \"email\": \"guilherme@email.com\",\n  \"senha\": \"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/cadastro/cadastro-usuario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"cadastro",
+										"cadastro-usuario"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 201,\n    \"httpStatus\": \"CREATED\",\n    \"mensagem\": \"Usuário cadastrado com sucesso.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "health",
+			"item": [
+				{
+					"name": "http://localhost:8080/v1/health/check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/health/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"health",
+								"check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
