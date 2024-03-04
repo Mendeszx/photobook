@@ -58,8 +58,8 @@ cd photobook
 docker-compose up
 ```
 
-- Isso iniciará o backend (Spring Boot) em [http://localhost:8080](http://localhost:8080)
-- e o frontend (Angular) em [http://localhost:4200](http://localhost:4200) (Em Desenvolvimento)
+- Backend (Spring Boot) em [http://localhost:8080](http://localhost:8080)
+- Frontend (Angular) em [http://localhost:4200](http://localhost:4200) (Em Desenvolvimento)
 
 ## Estrutura do Projeto
 

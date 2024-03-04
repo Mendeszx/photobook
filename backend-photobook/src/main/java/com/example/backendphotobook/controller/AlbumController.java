@@ -6,6 +6,7 @@ import com.example.backendphotobook.dtos.response.CadastrarNovoAlbumResponse;
 import com.example.backendphotobook.dtos.response.ListarAlbunsResponse;
 import com.example.backendphotobook.services.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ public class AlbumController {
     }
 
     @GetMapping("/listar-albuns/{usuarioId}")
+    @Cacheable("Albuns")
     public ResponseEntity<List<ListarAlbunsResponse>> listarAlbuns(@PathVariable long usuarioId) {
         return albumService.listarAlbuns(usuarioId);
     }
