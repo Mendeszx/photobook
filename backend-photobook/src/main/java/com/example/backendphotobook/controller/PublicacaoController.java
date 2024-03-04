@@ -8,6 +8,7 @@ import com.example.backendphotobook.dtos.response.PublicacaoResponse;
 import com.example.backendphotobook.services.ComentarioService;
 import com.example.backendphotobook.services.PublicacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class PublicacaoController {
         return publicacaoService.cadastrarNovaPublicacao(cadastrarPublicacaoRequest);
     }
 
+    @Cacheable("Publicacoes")
     @GetMapping("/listar-publicacoes")
     public ResponseEntity<List<ListarPublicacoesResponse>> listarPublicacoes() {
         return publicacaoService.listarPublicacoes();

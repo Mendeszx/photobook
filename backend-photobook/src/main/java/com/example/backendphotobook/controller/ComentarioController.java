@@ -6,6 +6,7 @@ import com.example.backendphotobook.dtos.request.ListarComentariosRequest;
 import com.example.backendphotobook.dtos.response.*;
 import com.example.backendphotobook.services.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ public class ComentarioController {
         return comentarioService.cadastrarNovoComentario(cadastrarComentarioRequest);
     }
 
+    @Cacheable("Comentarios")
     @GetMapping("/listar-comentarios")
     public ResponseEntity<List<ListarComentariosResponse>> listarComentarios(@RequestBody ListarComentariosRequest listarComentariosRequest) {
         return comentarioService.listarComentarios(listarComentariosRequest);
